@@ -2,9 +2,15 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 # Implement a DiceSet Class here:
 #
-# class DiceSet
-#   code ...
-# end
+class DiceSet
+  MAX_DIE_VALUE = 6
+  def roll( number_of_dice )
+    @dice = Array.new(number_of_dice) { rand(MAX_DIE_VALUE) + 1}
+  end
+  def values
+    @dice
+  end
+end
 
 class AboutDiceProject < EdgeCase::Koan
   def test_can_create_a_dice_set
@@ -34,9 +40,11 @@ class AboutDiceProject < EdgeCase::Koan
   def test_dice_values_should_change_between_rolls
     dice = DiceSet.new
 
+    srand(7)
     dice.roll(5)
     first_time = dice.values
 
+    srand(13)
     dice.roll(5)
     second_time = dice.values
 
