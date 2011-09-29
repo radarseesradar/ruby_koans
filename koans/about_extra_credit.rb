@@ -24,7 +24,8 @@
 #   value
 #   TurnAccumulator
 #     update
-#     accumulable?
+#     contributable?
+#     check_contributable
 #     clear
 #   GameAccumulator
 #     update
