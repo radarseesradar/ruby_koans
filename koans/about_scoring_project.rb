@@ -80,6 +80,14 @@ class AboutScoringProject < EdgeCase::Koan
   
   def test_number_of_non_scoring_dice
     assert_equal 1, number_of_non_scoring_dice([2,5,2,2,3])
+    assert_equal 2, number_of_non_scoring_dice([2,5,2,2,3,4])
+    assert_equal 0, number_of_non_scoring_dice([4,4,4])
+    assert_equal 4, number_of_non_scoring_dice([2,3,4,6])
+    assert_equal 0, number_of_non_scoring_dice([5])
+    assert_equal 1, number_of_non_scoring_dice( [3] )
+    assert_equal 3, number_of_non_scoring_dice( [4,6,2,5,1,5] )
+    assert_equal 5, number_of_non_scoring_dice( [4,2,6,3,4,5] )
+    assert_equal 3, number_of_non_scoring_dice( [3,3,3,2,4,3] )
   end
 
 end
