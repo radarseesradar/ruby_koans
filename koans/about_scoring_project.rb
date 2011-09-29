@@ -35,6 +35,10 @@ def score(dice)
   Scorer.new( dice ).score
 end
 
+def number_of_non_scoring_dice(dice)
+  Scorer.new( dice ).number_of_non_scoring_dice
+end
+
 
 class AboutScoringProject < EdgeCase::Koan
   def test_score_of_an_empty_list_is_zero
@@ -72,6 +76,10 @@ class AboutScoringProject < EdgeCase::Koan
   def test_score_of_mixed_is_sum
     assert_equal 250, score([2,5,2,2,3])
     assert_equal 550, score([5,5,5,5])
+  end
+  
+  def test_number_of_non_scoring_dice
+    assert_equal 1, number_of_non_scoring_dice([2,5,2,2,3])
   end
 
 end
