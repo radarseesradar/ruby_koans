@@ -88,6 +88,7 @@ class AboutScoringProject < EdgeCase::Koan
     assert_equal 3, number_of_non_scoring_dice( [4,6,2,5,1,5] )
     assert_equal 5, number_of_non_scoring_dice( [4,2,6,3,4,5] )
     assert_equal 3, number_of_non_scoring_dice( [3,3,3,2,4,3] )
+    assert_equal 0, number_of_non_scoring_dice( [] )
   end
 
 end
