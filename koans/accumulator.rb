@@ -37,3 +37,21 @@ class TurnAccumulator < Accumulator
   end
 
 end
+
+class GameAccumulator < Accumulator
+
+  WIN_ZONE_FLOOR = 300
+  
+  def update( turn_accumulator )
+    turn_accumulator.check_contributable
+    @value += turn_accumulator.value if turn_accumulator.contributable?
+    turn_accumulator.clear
+    @in_win_zone = @value >= WIN_ZONE_FLOOR
+  end
+  
+  def in_win_zone?
+    @in_win_zone
+  end
+
+end
+

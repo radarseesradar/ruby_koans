@@ -63,3 +63,61 @@ class AboutTurnAccumulator < EdgeCase::Koan
   end
 
 end
+
+class AboutGameAccumulator < EdgeCase::Koan
+  
+  def test_update_should_set_arg_to_contributable
+    turn_accumulator = TurnAccumulator.new
+    turn_accumulator.update( TurnAccumulator::CONTRIBUTABLE_FLOOR )
+    assert_equal false, turn_accumulator.contributable?
+    game_accumulator = GameAccumulator.new
+    game_accumulator.update( turn_accumulator)
+    assert_equal true, turn_accumulator.contributable?
+  end
+
+  def test_update_should_clear_args_value
+    turn_accumulator = TurnAccumulator.new
+    turn_accumulator.update( 50 )
+    game_accumulator = GameAccumulator.new
+    game_accumulator.update( turn_accumulator)
+    assert_equal 0,turn_accumulator.value
+  end
+  
+  def test_game_accumulator_should_update_its_value_if_arg_is_contributable
+      turn_accumulator = TurnAccumulator.new
+      turn_accumulator.update( TurnAccumulator::CONTRIBUTABLE_FLOOR )
+      game_accumulator = GameAccumulator.new
+      game_accumulator.update( turn_accumulator)
+      assert_equal TurnAccumulator::CONTRIBUTABLE_FLOOR,game_accumulator.value
+  end
+
+
+  def test_game_accumulator_should_not_update_its_value_if_arg_is_not_contributable
+    turn_accumulator = TurnAccumulator.new
+    turn_accumulator.update( 50 )
+    game_accumulator = GameAccumulator.new
+    game_accumulator.update( turn_accumulator)
+    assert_equal 0,game_accumulator.value
+  end
+  
+  
+  def test_should_be_in_win_zone
+    turn_accumulator = TurnAccumulator.new
+    turn_accumulator.update( GameAccumulator::WIN_ZONE_FLOOR )
+    game_accumulator = GameAccumulator.new
+    game_accumulator.update( turn_accumulator )
+    assert_equal true, game_accumulator.in_win_zone?
+    turn_accumulator.update( 50 )
+    assert_equal true, game_accumulator.in_win_zone?
+  end
+  
+  def test_should_not_be_in_win_zone
+    turn_accumulator = TurnAccumulator.new
+    turn_accumulator.update( 50 )
+    game_accumulator = GameAccumulator.new
+    game_accumulator.update( turn_accumulator )
+    assert_equal false, game_accumulator.in_win_zone?
+  end
+  
+end
+

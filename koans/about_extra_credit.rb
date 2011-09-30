@@ -9,7 +9,6 @@
 
 # Player
 #   name
-#   first_in_win_zone?
 # Game
 #   play
 # Round
