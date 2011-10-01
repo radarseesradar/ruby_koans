@@ -14,7 +14,6 @@
 # Game
 #   play
 #   players
-#   play_message
 #   last_round?
 # Round
 #   play
@@ -22,8 +21,8 @@
 #   game
 # Turn
 #   play
-#   play_message
-#   roll_message
+#   turn_status_message
+#   roll_status_message
 #   confirm?
 #   roll
 #   over?
