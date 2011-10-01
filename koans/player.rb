@@ -1,14 +1,18 @@
+require 'accumulator'
+
 class ValidNameError < RuntimeError
 end
 
 class Player
   include Comparable
-  attr_reader :name
+  attr_reader :name, :turn_accumulator, :game_accumulator
   
   def initialize( name )
     raise ValidNameError unless name.respond_to?(:to_str)
     @name = String.new(name)
     normalize_name
+    @turn_accumulator = TurnAccumulator.new
+    @game_accumulator = GameAccumulator.new
   end
   
   def <=>( other_player )

@@ -37,4 +37,6 @@ in_ruby_version("jruby") do
 end
 require 'about_accumulator'
 require 'about_player'
+require 'about_turn'
+require 'about_game'
 require 'about_extra_credit'

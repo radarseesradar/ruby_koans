@@ -32,5 +32,15 @@ class AboutPlayer < EdgeCase::Koan
   def test_remove_duplicate_players_from_array
     assert_equal 1, [Player.new('John Doe'), Player.new('John Doe')].uniq.size
   end
-
+  
+  def test_player_should_have_a_turn_accumulator
+    a_player = Player.new( 'Mary' )
+    assert_equal true,a_player.turn_accumulator.is_a?(TurnAccumulator)
+  end
+  
+  def test_player_should_have_a_game_accumulator
+    a_player = Player.new( 'Mary' )
+    assert_equal true,a_player.game_accumulator.is_a?(GameAccumulator)
+  end
+  
 end
