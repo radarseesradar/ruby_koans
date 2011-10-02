@@ -34,7 +34,7 @@ class Turn
     @over
   end    
   
-  def roll( dice_set_array = roll_randomly( @number_of_dice_available ) )
+  def roll_predictably( dice_set_array )
     @last_roll_array = dice_set_array
     scorer = Scorer.new( @last_roll_array )
     score = scorer.score
@@ -43,10 +43,10 @@ class Turn
     @number_of_dice_available = scorer.number_of_non_scoring_dice
   end  
   
-  def roll_randomly( number_of_dice = @number_of_dice_available )
+  def roll( number_of_dice = @number_of_dice_available )
     dice_set = DiceSet.new
     dice_set.roll( number_of_dice )
-    dice_set.values
+    roll_predictably( dice_set.values )
   end
   
   def first_part_of_roll_status_message

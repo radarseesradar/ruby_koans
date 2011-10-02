@@ -19,15 +19,15 @@ class AboutTurn < EdgeCase::Koan
     assert_equal Game::TOTAL_NUMBER_OF_DICE,current_turn.number_of_dice_available
   end
   
-  def test_roll_randomly
+  def test_roll_3_dice
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    roll = current_turn.roll_randomly( 3 )
-    assert_equal 3,roll.size
+    current_turn.roll( 3 )
+    assert_equal 3,current_turn.last_roll_array.size
   end
   
-  def test_roll
+  def test_initial_roll
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
@@ -44,7 +44,7 @@ STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    current_turn.roll( [1, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [1, 2, 4, 6, 3] )
     assert_equal roll_status_message.chomp, current_turn.roll_status_message
   end
 
@@ -56,9 +56,9 @@ STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    current_turn.roll( [1, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [1, 2, 4, 6, 3] )
     next_turn = Turn.new( current_game, current_player )
-    next_turn.roll( [1, 2, 4, 6, 3])
+    next_turn.roll_predictably( [1, 2, 4, 6, 3])
     assert_equal roll_status_message.chomp, next_turn.roll_status_message
   end
   
@@ -66,7 +66,7 @@ STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    current_turn.roll( [3, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [3, 2, 4, 6, 3] )
     assert_equal true,current_turn.over?
   end
   
@@ -74,7 +74,7 @@ STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    current_turn.roll( [1, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [1, 2, 4, 6, 3] )
     assert_equal false,current_turn.over?
   end
   
@@ -86,8 +86,8 @@ STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
-    current_turn.roll( [1, 2, 4, 6, 3] )
-    current_turn.roll( [1, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [1, 2, 4, 6, 3] )
+    current_turn.roll_predictably( [1, 2, 4, 6, 3] )
     assert_equal roll_status_message.chomp, current_turn.roll_status_message
   end
 
