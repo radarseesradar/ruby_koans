@@ -7,7 +7,7 @@ require 'scorer'
 
 class Turn
 
-  attr_reader :player, :game, :number_of_dice_available, :last_roll_array
+  attr_reader :player, :game, :number_of_dice_available, :last_roll_values
 
   def initialize( game, player  )
     @game = game
@@ -34,9 +34,9 @@ class Turn
     @over
   end    
   
-  def roll_predictably( dice_set_array )
-    @last_roll_array = dice_set_array
-    scorer = Scorer.new( @last_roll_array )
+  def roll_predictably( roll_values )
+    @last_roll_values = roll_values
+    scorer = Scorer.new( @last_roll_values )
     score = scorer.score
     @over = score == 0
     @player.turn_accumulator.update( score )
@@ -50,7 +50,7 @@ class Turn
   end
   
   def first_part_of_roll_status_message
-    "You just rolled #{@last_roll_array}, and you have accumulated #{@player.turn_accumulator.value} turn points."
+    "You just rolled #{@last_roll_values}, and you have accumulated #{@player.turn_accumulator.value} turn points."
   end
   
   def roll_status_message

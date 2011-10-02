@@ -24,7 +24,7 @@ class AboutTurn < EdgeCase::Koan
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
     current_turn.roll( 3 )
-    assert_equal 3,current_turn.last_roll_array.size
+    assert_equal 3,current_turn.last_roll_values.size
   end
   
   def test_initial_roll
@@ -32,7 +32,7 @@ class AboutTurn < EdgeCase::Koan
     current_player = current_game.players.first
     current_turn = Turn.new( current_game, current_player )
     current_turn.roll
-    assert_equal 5,current_turn.last_roll_array.size
+    assert_equal 5,current_turn.last_roll_values.size
   end
   
   

@@ -38,6 +38,9 @@
 #   GameAccumulator
 #     update
 #     in_win_zone?
+#   DiceSet
+#     roll
+#     values
 
 
 # John, the game scores are 3000, 0, *2000, and 2500.
