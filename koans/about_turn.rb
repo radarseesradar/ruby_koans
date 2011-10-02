@@ -38,7 +38,7 @@ class AboutTurn < EdgeCase::Koan
   
   def test_roll_status_message
     roll_status_message = <<STATUS_MESSAGE
-You just rolled [1, 2, 4, 6, 3], and you have accumulated 100 points in this turn.
+You just rolled [1, 2, 4, 6, 3], and you have accumulated 100 turn points.
 Do you wish to roll your 4 remaining dice (yes/[no]) ? 
 STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
@@ -50,7 +50,7 @@ STATUS_MESSAGE
 
   def test_turn_should_begin_with_turn_accumulator_at_0
     roll_status_message = <<STATUS_MESSAGE
-You just rolled [1, 2, 4, 6, 3], and you have accumulated 100 points in this turn.
+You just rolled [1, 2, 4, 6, 3], and you have accumulated 100 turn points.
 Do you wish to roll your 4 remaining dice (yes/[no]) ? 
 STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
@@ -62,9 +62,25 @@ STATUS_MESSAGE
     assert_equal roll_status_message.chomp, next_turn.roll_status_message
   end
   
+  def test_over_should_be_true
+    current_game = Game.new( 'John', 'Mary' )
+    current_player = current_game.players.first
+    current_turn = Turn.new( current_game, current_player )
+    current_turn.roll( [3, 2, 4, 6, 3] )
+    assert_equal true,current_turn.over?
+  end
+  
+  def test_over_should_be_false
+    current_game = Game.new( 'John', 'Mary' )
+    current_player = current_game.players.first
+    current_turn = Turn.new( current_game, current_player )
+    current_turn.roll( [1, 2, 4, 6, 3] )
+    assert_equal false,current_turn.over?
+  end
+  
   def test_values_of_rolls_within_turn_should_accumulate
     roll_status_message = <<STATUS_MESSAGE
-You just rolled [1, 2, 4, 6, 3], and you have accumulated 200 points in this turn.
+You just rolled [1, 2, 4, 6, 3], and you have accumulated 200 turn points.
 Do you wish to roll your 4 remaining dice (yes/[no]) ? 
 STATUS_MESSAGE
     current_game = Game.new( 'John', 'Mary' )
