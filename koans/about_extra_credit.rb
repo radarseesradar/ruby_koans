@@ -11,14 +11,22 @@
 #   name
 #   game_accumulator
 #   turn_accumulator
+#
 # Game
 #   play
 #   players
 #   last_round?
+#
 # Round
 #   play
 #   players
 #   game
+#   last_round_message
+#
+#   LastRound
+#     last_round_message
+#     winner_message
+#
 # Turn
 #   play
 #   turn_status_message
@@ -27,20 +35,28 @@
 #   roll
 #   over?
 #   player
-#   game
+#   round
+#
 # Accumulator
 #   value
+#
 #   TurnAccumulator
 #     update
 #     contributable?
 #     check_contributable
 #     clear
+#
 #   GameAccumulator
 #     update
 #     in_win_zone?
+#
 #   DiceSet
 #     roll
 #     values
+#
+#   Scorer
+#     score
+#     number_of_non_scoring_dice
 
 
 # John, the game scores are 3000, 0, *2000, and 2500.

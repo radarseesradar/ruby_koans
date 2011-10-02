@@ -19,6 +19,14 @@ class AboutTurn < EdgeCase::Koan
     assert_equal Game::TOTAL_NUMBER_OF_DICE,current_turn.number_of_dice_available
   end
   
+  def test_turn_should_wrap_at_0_dice_to_5_dice
+    current_game = Game.new( 'John', 'Mary' )
+    current_player = current_game.players.first
+    current_turn = Turn.new( current_game, current_player )
+    current_turn.roll_predictably( [1, 1, 1, 5, 5] )
+    assert_equal Game::TOTAL_NUMBER_OF_DICE,current_turn.number_of_dice_available
+  end
+
   def test_roll_3_dice
     current_game = Game.new( 'John', 'Mary' )
     current_player = current_game.players.first

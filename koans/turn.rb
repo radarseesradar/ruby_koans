@@ -41,6 +41,7 @@ class Turn
     @over = score == 0
     @player.turn_accumulator.update( score )
     @number_of_dice_available = scorer.number_of_non_scoring_dice
+    @number_of_dice_available = Game::TOTAL_NUMBER_OF_DICE if @number_of_dice_available == 0 
   end  
   
   def roll( number_of_dice = @number_of_dice_available )
