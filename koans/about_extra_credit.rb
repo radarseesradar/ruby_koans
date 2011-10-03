@@ -19,17 +19,20 @@
 #
 # Round
 #   play
-#   players
 #   game
 #   last_round_message
+#   game_status_message
 #
 #   LastRound
+#     players
+#     play
 #     last_round_message
 #     winner_message
+#     game_status_message
+#     first_player_in_win_zone
 #
 # Turn
 #   play
-#   turn_status_message
 #   roll_status_message
 #   confirm?
 #   roll
@@ -50,13 +53,13 @@
 #     update
 #     in_win_zone?
 #
-#   DiceSet
-#     roll
-#     values
-#
-#   Scorer
-#     score
-#     number_of_non_scoring_dice
+# DiceSet
+#   roll
+#   values
+# 
+# Scorer
+#   score
+#   number_of_non_scoring_dice
 
 
 # John, the game scores are 3000, 0, *2000, and 2500.
