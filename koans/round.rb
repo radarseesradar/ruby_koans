@@ -58,5 +58,11 @@ class LastRound < Round
   def last_round_message
     'This is the last round.'
   end
+  
+  def winners
+    first_max = game.players.max_by { | p | p.game_accumulator.value }
+    game.players.find_all { | p | p.game_accumulator.value == first_max.game_accumulator.value }
+  end
+    
 
 end

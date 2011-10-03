@@ -11,6 +11,7 @@
 #   name
 #   game_accumulator
 #   turn_accumulator
+#   in_win_zone?
 #
 # Game
 #   play

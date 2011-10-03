@@ -137,5 +137,20 @@ class AboutLastRound < EdgeCase::Koan
     assert_equal 'Mary, the game scores are (3000), *400, and 350.', round.game_status_message( mary )
   end
   
+  def test_winners
+    game = Game.new( 'John', 'Mary', 'Elizabeth')
+    john = game.players.first
+    john.turn_accumulator.update( 3500 )
+    john.game_accumulator.update( john.turn_accumulator )
+    mary = game.players[1]
+    mary.turn_accumulator.update( 3500 )
+    mary.game_accumulator.update( mary.turn_accumulator )
+    elizabeth = game.players.last
+    elizabeth.turn_accumulator.update( 350 )
+    elizabeth.game_accumulator.update( elizabeth.turn_accumulator )
+    round = LastRound.new( game )
+    assert_equal [john,mary], round.winners
+  end
+  
 
 end
