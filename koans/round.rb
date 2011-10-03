@@ -63,6 +63,17 @@ class LastRound < Round
     first_max = game.players.max_by { | p | p.game_accumulator.value }
     game.players.find_all { | p | p.game_accumulator.value == first_max.game_accumulator.value }
   end
+  
+  def winner_message
+    winners = self.winners
+    if winners.size == 1
+      "#{winners.first.name} is the winner."
+    elsif winners.size > 1
+      "#{winners[0...-1].map(&:name).join(', ')} and #{winners[-1].name} are winners."
+    else
+      ''
+    end
+  end
     
 
 end
