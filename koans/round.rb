@@ -38,6 +38,12 @@ end
 
 class LastRound < Round
   
+  attr_reader :first_player_in_win_zone
+  
+  def initialize( game )
+    @first_player_in_win_zone = game.players.find( &:in_win_zone? )
+  end
+    
   def last_round_message
     'This is the last round.'
   end

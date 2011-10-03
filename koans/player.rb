@@ -27,6 +27,10 @@ class Player
     name.hash
   end
   
+  def in_win_zone?
+    game_accumulator.in_win_zone?
+  end
+  
   def normalize_name
     @name = @name.strip.squeeze
     raise ValidNameError if @name.empty?

@@ -9,6 +9,10 @@ class AboutAccumulator < EdgeCase::Koan
 end
 
 class AboutTurnAccumulator < EdgeCase::Koan
+  
+  def test_turn_accumulator_contributable_floor_should_be_300
+    assert_equal 300, TurnAccumulator::CONTRIBUTABLE_FLOOR
+  end
 
   def test_turn_accumulator_should_be_updateable
     accumulator = TurnAccumulator.new
@@ -66,6 +70,10 @@ end
 
 class AboutGameAccumulator < EdgeCase::Koan
   
+  def test_game_accumulator_win_zone_floor_should_be_3000
+    assert_equal 3000, GameAccumulator::WIN_ZONE_FLOOR 
+  end
+
   def test_update_should_set_arg_to_contributable
     turn_accumulator = TurnAccumulator.new
     turn_accumulator.update( TurnAccumulator::CONTRIBUTABLE_FLOOR )
@@ -99,7 +107,7 @@ class AboutGameAccumulator < EdgeCase::Koan
     game_accumulator.update( turn_accumulator)
     assert_equal 0,game_accumulator.value
   end
-  
+    
   
   def test_should_be_in_win_zone
     turn_accumulator = TurnAccumulator.new

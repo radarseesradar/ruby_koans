@@ -40,7 +40,7 @@ end
 
 class GameAccumulator < Accumulator
 
-  WIN_ZONE_FLOOR = 300
+  WIN_ZONE_FLOOR = 3000
   
   def update( turn_accumulator )
     turn_accumulator.check_contributable
