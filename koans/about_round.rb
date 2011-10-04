@@ -79,7 +79,22 @@ class AboutLastRound < EdgeCase::Koan
     assert_equal mary,round.first_player_in_win_zone
   end
 
-  def test_players
+  def test_players_when_first_player_in_win_zone
+    game = Game.new( 'John', 'Mary', 'Elizabeth')
+    john = game.players.first
+    john.turn_accumulator.update( 3000 )
+    john.game_accumulator.update( john.turn_accumulator )
+    mary = game.players[1]
+    mary.turn_accumulator.update( 300 )
+    mary.game_accumulator.update( mary.turn_accumulator )
+    elizabeth = game.players.last
+    elizabeth.turn_accumulator.update( 350 )
+    elizabeth.game_accumulator.update( elizabeth.turn_accumulator )
+    round = LastRound.new( game )
+    assert_equal  [mary, elizabeth], round.players
+  end
+
+  def test_players_when_middle_player_in_win_zone
     game = Game.new( 'John', 'Mary', 'Elizabeth')
     john = game.players.first
     john.turn_accumulator.update( 300 )
@@ -94,6 +109,21 @@ class AboutLastRound < EdgeCase::Koan
     assert_equal  [elizabeth, john], round.players
   end
   
+  def test_players_when_last_player_in_win_zone
+    game = Game.new( 'John', 'Mary', 'Elizabeth')
+    john = game.players.first
+    john.turn_accumulator.update( 300 )
+    john.game_accumulator.update( john.turn_accumulator )
+    mary = game.players[1]
+    mary.turn_accumulator.update( 300 )
+    mary.game_accumulator.update( mary.turn_accumulator )
+    elizabeth = game.players.last
+    elizabeth.turn_accumulator.update( 3500 )
+    elizabeth.game_accumulator.update( elizabeth.turn_accumulator )
+    round = LastRound.new( game )
+    assert_equal  [john, mary], round.players
+  end
+
   def test_score_as_string
     game = Game.new( 'John', 'Mary', 'Elizabeth')
     john = game.players.first

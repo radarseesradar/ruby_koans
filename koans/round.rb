@@ -63,9 +63,8 @@ class LastRound < Round
     super
     @first_player_in_win_zone = game.players.find( &:in_win_zone? )
     return unless @first_player_in_win_zone
-    after = game.players.last( game.players.size - 1 - game.players.index( @first_player_in_win_zone ) )
-    before = game.players.first( game.players.index( @first_player_in_win_zone ) )
-    @players = after + before
+    players = game.players
+    @players = players.rotate( players.index(@first_player_in_win_zone) ).drop(1)
   end
   
   def play
