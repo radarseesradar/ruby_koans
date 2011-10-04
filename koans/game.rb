@@ -23,6 +23,7 @@ class Game
 end
 
 if $0 == __FILE__
-  game = Game.new( 'Susan', 'John', 'Mary')
+  # game = Game.new( 'Susan', 'John', 'Mary')
+  game = Game.new( *ARGV )
   game.play
 end

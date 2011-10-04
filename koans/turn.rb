@@ -25,7 +25,7 @@ class Turn
   
   def confirm?
     Kernel.print roll_status_message
-    answer = Kernel::gets.chomp
+    answer = STDIN.gets.chomp
     Kernel.puts
     /^y/i =~ answer
   end
