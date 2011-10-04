@@ -1,5 +1,4 @@
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
-require 'game'
 require 'player'
 require 'dice_set'
 require 'scorer'
@@ -21,12 +20,13 @@ class Turn
       roll
     end while !over? && confirm?
     player.game_accumulator.update( player.turn_accumulator )
-    puts first_part_of_roll_status_message if over?
+    Kernel.puts first_part_of_roll_status_message if over?
   end
   
   def confirm?
-    Kernel::print roll_status_message
+    Kernel.print roll_status_message
     answer = Kernel::gets.chomp
+    Kernel.puts
     /^y/i =~ answer
   end
   
@@ -63,11 +63,4 @@ STATUS_MESSAGE
     roll_status_message.chomp
   end
   
-end
-
-if __FILE__ == $0
-  current_game = Game.new( 'John', 'Mary' )
-  current_player = current_game.players.first
-  current_turn = Turn.new( current_game, current_player )
-  current_turn.play
 end

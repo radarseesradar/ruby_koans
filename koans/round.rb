@@ -1,9 +1,28 @@
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
+require 'turn'
 class Round
 
   attr_reader :game
 
   def initialize( game )
     @game = game
+  end
+  
+  def play_common( player )
+    Kernel.puts
+    Kernel.puts
+    Kernel.puts game_status_message( player )
+    Kernel.puts last_round_message
+    Kernel.puts
+    current_turn = Turn.new( game, player )
+    current_turn.play
+  end
+  
+  def play
+    game.players.each do | player |
+      play_common( player )
+      break if player.in_win_zone?
+    end
   end
   
   def last_round_message
@@ -49,6 +68,15 @@ class LastRound < Round
     @players = after + before
   end
   
+  def play
+    players.each do | player |
+      play_common( player )
+    end
+    Kernel.puts
+    Kernel.puts final_scores_message
+    Kernel.puts winner_message
+  end
+
   def score_as_string( player )
     score = super
     score = '(' + score + ')' if player == first_player_in_win_zone
@@ -62,6 +90,11 @@ class LastRound < Round
   def winners
     first_max = game.players.max_by { | p | p.game_accumulator.value }
     game.players.find_all { | p | p.game_accumulator.value == first_max.game_accumulator.value }
+  end
+  
+  def final_scores_message
+    scores = game.players.map { | p | p.game_accumulator.value.to_s }
+    "Final scores are #{scores[0...-1].join(', ')} and #{scores[-1]}."
   end
   
   def winner_message
