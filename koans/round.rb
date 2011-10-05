@@ -8,12 +8,13 @@ class Round
     @game = game
   end
   
+  
   def play_common( player )
-    Kernel.puts
-    Kernel.puts
-    Kernel.puts game_status_message( player )
-    Kernel.puts last_round_message
-    Kernel.puts
+    output_stream.puts
+    output_stream.puts
+    output_stream.puts game_status_message( player )
+    output_stream.puts last_round_message
+    output_stream.puts
     current_turn = Turn.new( game, player )
     current_turn.play
   end
@@ -53,6 +54,12 @@ class Round
     "#{current_player.name}, the game scores are #{first_scores} and #{last_score}."
   end
 
+  def output_stream
+    game.output_stream
+  end
+  
+  private :output_stream
+
 end
 
 class LastRound < Round
@@ -71,9 +78,9 @@ class LastRound < Round
     players.each do | player |
       play_common( player )
     end
-    Kernel.puts
-    Kernel.puts final_scores_message
-    Kernel.puts winner_message
+    output_stream.puts
+    output_stream.puts final_scores_message
+    output_stream.puts winner_message
   end
 
   def score_as_string( player )

@@ -4,6 +4,8 @@ require 'round'
 
 class Game
   
+  attr_accessor :input_stream, :output_stream
+  
   TOTAL_NUMBER_OF_DICE = 5
 
   attr_reader :players
@@ -11,6 +13,8 @@ class Game
   def initialize( *players )
     @players = players.map { |player| Player.new( player ) }
     @players = @players.uniq
+    @input_stream = STDIN
+    @output_stream = STDOUT
   end
   
   def play
@@ -23,7 +27,6 @@ class Game
 end
 
 if $0 == __FILE__
-  # game = Game.new( 'Susan', 'John', 'Mary')
   game = Game.new( *ARGV )
   game.play
 end

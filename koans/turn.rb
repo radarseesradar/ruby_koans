@@ -20,13 +20,14 @@ class Turn
       roll
     end while !over? && confirm?
     player.game_accumulator.update( player.turn_accumulator )
-    Kernel.puts first_part_of_roll_status_message if over?
+    output_stream.puts first_part_of_roll_status_message if over?
+    output_stream.puts( '=' * 30 )
   end
   
   def confirm?
-    Kernel.print roll_status_message
-    answer = STDIN.gets.chomp
-    Kernel.puts
+    output_stream.print roll_status_message
+    answer = input_stream.gets.chomp
+    output_stream.puts
     /^y/i =~ answer
   end
   
@@ -62,5 +63,15 @@ Do you wish to roll your #{@number_of_dice_available} remaining #{dice_or_die} (
 STATUS_MESSAGE
     roll_status_message.chomp
   end
+  
+  def output_stream
+    game.output_stream
+  end
+  
+  def input_stream
+    game.input_stream
+  end
+  
+  private :output_stream, :input_stream
   
 end
